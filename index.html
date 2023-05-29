@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Creator</title>
+    <link rel="stylesheet" href="style1.css"
+</head>
+<body>
+    <div id="customize">
+        <!--sliders with customization go here-->
+        <div class="sliderdiv">
+            <input type="range" min="3" max="20" id="sides" class="slider" onchange="loop()">
+            <p>sides: <span id="numberS"></span></p>
+
+            <script>
+                var sides = document.getElementById("sides");
+                var outputS = document.getElementById("numberS");
+                outputS.innerHTML = sides.value;
+
+                sides.oninput = function()
+                {
+                    outputS.innerHTML = this.value;
+                }
+            </script>
+        </div>
+        <div class="sliderdiv">
+            <input type="range" min="1" max="50" id="length" class="slider">
+            <p>length: <span id="numberL"></span></p>
+
+            <script>
+                var length = document.getElementById("length");
+                var outputL = document.getElementById("numberL");
+                outputL.innerHTML = length.value;
+
+                length.oninput = function()
+                {
+                    outputL.innerHTML = this.value;
+                }
+            </script>
+        </div>
+        <div class="sliderdiv">
+            <input type="range" min="0" max="360" id="angle" class="slider">
+            <p>angle: <span id="numberA"></span></p>
+                <script>
+                    var angle = document.getElementById("angle");
+                    var outputA = document.getElementById("numberA");
+                    outputA.innerHTML = angle.value;
+
+                    angle.oninput = function()
+                    {
+                        outputA.innerHTML = this.value;
+                    }
+            </script>
+        </div>
+    </div>
+
+    <div id="shape">
+        shape
+        <!--Shape is generated here-->
+
+        <div id="svg">
+            <svg height="500" width="500">
+                <polygon points="0,0" style="fill:rgb(255, 255, 255);stroke:rgb(0, 0, 0);stroke-width:1"/>
+                Sorry, your browser does not support inline SVG.
+              </svg>
+        </div>
+
+        <script>
+            console.log("bruh");
+
+            var svg = document.getElementById("svg");
+            svg.innerHTML = '<svg height="500" width="500"><polygon points='
+
+            
+
+            function loop()
+            {
+                //loop with inner.HTML generating coordinates of points
+                for (var i = 1; i <= sides.value; i++)
+                {
+                    var point = 
+                    svg.innerHTML += ''
+                }
+            }
+                
+            //inner.HTML end of svg
+
+        </script>
+        
+    </div>
+
+    <div id="code">
+        <!--Textbox with code goes here-->
+        code
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+body
+{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar
+{
+    display: none;
+}
+
+#shape
+{
+    width: 100%;
+    height: 50vh;
+    background-color: #f3f3f3;
+}
+
+#customize
+{
+    width: 100%;
+    height: 50%;
+    line-height: 0;
+}
+
+.sliderdiv
+{
+    background: #ebebeb;
+    
+}
+
+.slider
+{
+    width: 100%;
+    height: 50px;
+    outline: none;
+    opacity: 0.5;
+    -webkit-transition: .9s;
+    transition: opacity .9s;
+    
+}
+
+.slider:hover
+{
+    opacity: 1;
+    cursor:grab;
+}
+
+.slider::-webkit-slider-thumb
+{
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D; 
+    
+}
+
+#code
+{
+    background-color: #ebebeb;
+    line-height: 5;
+}
