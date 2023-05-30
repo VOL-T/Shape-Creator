@@ -26,17 +26,17 @@
             </script>
         </div>
         <div class="sliderdiv">
-            <input type="range" min="1" max="50" id="length" class="slider">
-            <p>length: <span id="numberL"></span></p>
+            <input type="range" min="1" max="50" id="size" class="slider">
+            <p>size: <span id="numberSi"></span></p>
 
             <script>
-                var length = document.getElementById("length");
-                var outputL = document.getElementById("numberL");
-                outputL.innerHTML = length.value;
+                var size = document.getElementById("size");
+                var outputSi = document.getElementById("numberSi");
+                outputSi.innerHTML = size.value;
 
-                length.oninput = function()
+                size.oninput = function()
                 {
-                    outputL.innerHTML = this.value;
+                    outputSi.innerHTML = this.value;
                 }
             </script>
         </div>
@@ -63,17 +63,19 @@
         <div id="draw">
             <script>
                 document.getElementById("sides").addEventListener("change", draw);
+                document.getElementById("size").addEventListener("change", draw);
 
                 function draw()
                 {
+                    var div = document.getElementById("draw");
                     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('width', '1000');
-                    svg.setAttribute('height', '1000');
+                    svg.setAttribute('width', size.value * 20);
+                    svg.setAttribute('height', size.value * 20);
                     svg.style.position = "absolute"; 
 
-                    var centerX = 500;
-                    var centerY = 500;
-                    var radius = 400;
+                    var centerX = size.value * 10;
+                    var centerY = size.value * 10;
+                    var radius = size.value * 8;
                     var angle = (2 * Math.PI) / sides.value;
                     var points = [];
 
@@ -88,10 +90,11 @@
 
                     var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
                     polygon.setAttribute('points', points.join(' '));
-                    polygon.setAttribute('fill', 'blue');
+                    polygon.setAttribute('fill', 'lime');
+                    polygon.setAttribute('stroke', 'black');
                     svg.appendChild(polygon);
 
-                    document.body.appendChild(svg);
+                    div.appendChild(svg);
                 }
             </script>
         </div>
