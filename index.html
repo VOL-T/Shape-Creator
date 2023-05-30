@@ -43,43 +43,78 @@
         <div class="sliderdiv">
             <input type="range" min="0" max="360" id="angle" class="slider">
             <p>angle: <span id="numberA"></span></p>
-                <script>
-                    var angle = document.getElementById("angle");
-                    var outputA = document.getElementById("numberA");
-                    outputA.innerHTML = angle.value;
+            <script>
+                var angle = document.getElementById("angle");
+                var outputA = document.getElementById("numberA");
+                outputA.innerHTML = angle.value;
 
-                    angle.oninput = function()
-                    {
-                        outputA.innerHTML = this.value;
-                    }
+                angle.oninput = function()
+                {
+                    outputA.innerHTML = this.value;
+                }
             </script>
+        </div>
+        <div class="color">
+            <input type="range" min="0" max="10" id="strokeW" class="slider">
+            <p>outline width: <span id="numberStr"></span></p>
+            fill color: <input type="color" id="fill"> outline color: <input type="color" id="stroke">
+            <script>
+                var strokeWidth = document.getElementById("strokeW");
+                var outputStr = document.getElementById("numberStr");
+                outputStr.innerHTML = strokeWidth.value;
+
+                strokeWidth.oninput = function()
+                {
+                    outputStr.innerHTML = this.value;
+                }
+            
+                var fill = document.getElementById("fill");
+                var stroke = document.getElementById("stroke");
+            </script>
+        </div>
+        <div id="empty">
+            
         </div>
     </div>
 
+    <div id="code">
+        <!--Textbox with code goes here-->
+        code:
+    </div>
+
     <div id="shape">
-        shape
         <!--Shape is generated here-->
 
         <div id="draw">
             <script>
                 document.getElementById("sides").addEventListener("change", draw);
                 document.getElementById("size").addEventListener("change", draw);
+                document.getElementById("fill").addEventListener("change", draw);
+                document.getElementById("stroke").addEventListener("change", draw);
+                document.getElementById("strokeW").addEventListener("change", draw);
 
                 function draw()
                 {
                     var div = document.getElementById("draw");
+                    
+                    if(div.firstChild)
+                    {
+                        div.innerHTML = "";
+                    }
+
                     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('width', size.value * 20);
-                    svg.setAttribute('height', size.value * 20);
+                    svg.setAttribute('width', size.value * 10);
+                    svg.setAttribute('height', size.value * 10);
                     svg.style.position = "absolute"; 
 
-                    var centerX = size.value * 10;
-                    var centerY = size.value * 10;
-                    var radius = size.value * 8;
+                    //determining the size of the shape
+                    var centerX = size.value * 5;
+                    var centerY = size.value * 5;
+                    var radius = size.value * 4;
                     var angle = (2 * Math.PI) / sides.value;
                     var points = [];
 
-                    //loop with inner.HTML generating coordinates of points
+                    //loop generating coordinates of points
                     for (var i = 0; i < sides.value; i++)
                     {
                         var x = centerX + radius * Math.cos(i * angle);
@@ -90,19 +125,18 @@
 
                     var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
                     polygon.setAttribute('points', points.join(' '));
-                    polygon.setAttribute('fill', 'lime');
-                    polygon.setAttribute('stroke', 'black');
+                    polygon.setAttribute('fill', fill.value);
+                    polygon.setAttribute('stroke', stroke.value);
+                    polygon.setAttribute('stroke-width', strokeWidth.value);
                     svg.appendChild(polygon);
 
                     div.appendChild(svg);
+
+                    //var code = document.getElementById("code");
+                    //code.innerHTML = '<div id="code"> code: <polygon points="' + points + '" style="fill:' + fill.value + ';stroke:' + stroke.value + ';stroke-width:' + strokeWidth.value + '"/> </div>'
                 }
             </script>
         </div>
-    </div>
-
-    <div id="code">
-        <!--Textbox with code goes here-->
-        code
     </div>
 </body>
 </html>

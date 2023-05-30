@@ -3,6 +3,7 @@ body
     text-align: center;
     margin: 0;
     padding: 0;
+    background: rgb(236, 236, 236);
 }
 
 body::-webkit-scrollbar
@@ -12,14 +13,16 @@ body::-webkit-scrollbar
 
 div
 {
-    z-index: 2;
+    padding: 0px;
+    width:100%;
+    margin:0 auto;
 }
+
 
 #shape
 {
     width: 100%;
-    height: 50vh;
-    background-color: #f3f3f3;
+    height: 60vh;
 }
 
 #customize
@@ -29,16 +32,10 @@ div
     line-height: 0;
 }
 
-.sliderdiv
-{
-    background: #ebebeb;
-    
-}
-
 .slider
 {
-    width: 100%;
-    height: 50px;
+    width: 75%;
+    height: 25px;
     outline: none;
     opacity: 0.5;
     -webkit-transition: .9s;
@@ -62,6 +59,11 @@ div
     
 }
 
+#empty
+{
+    height: 20px;
+}
+
 #shape
 {
     display: inline-block; 
@@ -76,11 +78,11 @@ div
     height: 100%;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    padding: 0px;
+    position: relative;
 }
 
 #code
 {
-    background-color: #ebebeb;
     line-height: 5;
 }
