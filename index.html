@@ -9,9 +9,9 @@
 </head>
 <body>
     <div id="customize">
-        <!--sliders with customization go here-->
+        <!--sliders with customization-->
         <div class="sliderdiv">
-            <input type="range" min="3" max="20" id="sides" class="slider" onchange="loop()">
+            <input type="range" min="3" max="20" id="sides" class="slider">
             <p>sides: <span id="numberS"></span></p>
 
             <script>
@@ -60,35 +60,41 @@
         shape
         <!--Shape is generated here-->
 
-        <div id="svg">
-            <svg height="500" width="500">
-                <polygon points="0,0" style="fill:rgb(255, 255, 255);stroke:rgb(0, 0, 0);stroke-width:1"/>
-                Sorry, your browser does not support inline SVG.
-              </svg>
-        </div>
+        <div id="draw">
+            <script>
+                document.getElementById("sides").addEventListener("change", draw);
 
-        <script>
-            console.log("bruh");
-
-            var svg = document.getElementById("svg");
-            svg.innerHTML = '<svg height="500" width="500"><polygon points='
-
-            
-
-            function loop()
-            {
-                //loop with inner.HTML generating coordinates of points
-                for (var i = 1; i <= sides.value; i++)
+                function draw()
                 {
-                    var point = 
-                    svg.innerHTML += ''
-                }
-            }
-                
-            //inner.HTML end of svg
+                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    svg.setAttribute('width', '1000');
+                    svg.setAttribute('height', '1000');
+                    svg.style.position = "absolute"; 
 
-        </script>
-        
+                    var centerX = 500;
+                    var centerY = 500;
+                    var radius = 400;
+                    var angle = (2 * Math.PI) / sides.value;
+                    var points = [];
+
+                    //loop with inner.HTML generating coordinates of points
+                    for (var i = 0; i < sides.value; i++)
+                    {
+                        var x = centerX + radius * Math.cos(i * angle);
+                        var y = centerY + radius * Math.sin(i * angle);
+                        points.push(x + "," + y);
+                        console.log(points);
+                    }
+
+                    var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    polygon.setAttribute('points', points.join(' '));
+                    polygon.setAttribute('fill', 'blue');
+                    svg.appendChild(polygon);
+
+                    document.body.appendChild(svg);
+                }
+            </script>
+        </div>
     </div>
 
     <div id="code">

@@ -57,6 +57,19 @@ body::-webkit-scrollbar
     
 }
 
+#shape
+{
+    display: inline-block; 
+    width: 100%;           
+    position: relative;
+}
+
+#draw
+{
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+}
+
 #code
 {
     background-color: #ebebeb;
