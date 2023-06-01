@@ -5,14 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shape Creator</title>
-    <link rel="stylesheet" href="style1.css"
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
+    <div id="tutorial">
+        <div id="tutorial-content">
+            Hi there, this HTML lets you create any SVG (Scalable Vector Graphics) shape (within limitations, feel free to change those by editing the code).
+            <br><br>So, how does this work?
+            <br>You can use the sliders and the color pickers to change the properties of the shape, the shape will then appear with code above it (remember to add the brackets "&lt/>")
+            <br>And feel free to check out my GitHub: https://github.com/VOL-T
+        </div>
+        <h2>Tutorial</h2>
+    </div>
     <div id="customize">
         <!--sliders with customization-->
         <div class="sliderdiv">
-            <input type="range" min="3" max="20" id="sides" class="slider">
             <p>sides: <span id="numberS"></span></p>
+            <input type="range" min="3" max="20" id="sides" class="slider">
 
             <script>
                 var sides = document.getElementById("sides");
@@ -22,12 +31,13 @@
                 sides.oninput = function()
                 {
                     outputS.innerHTML = this.value;
+                    draw();
                 }
             </script>
         </div>
         <div class="sliderdiv">
-            <input type="range" min="1" max="50" id="size" class="slider">
             <p>size: <span id="numberSi"></span></p>
+            <input type="range" min="1" max="50" id="size" class="slider">
 
             <script>
                 var size = document.getElementById("size");
@@ -37,12 +47,13 @@
                 size.oninput = function()
                 {
                     outputSi.innerHTML = this.value;
+                    draw();
                 }
             </script>
         </div>
         <div class="sliderdiv">
-            <input type="range" min="0" max="360" id="angle" class="slider">
             <p>angle: <span id="numberA"></span></p>
+            <input type="range" min="0" max="360" id="angle" class="slider">
             <script>
                 var angle = document.getElementById("angle");
                 var outputA = document.getElementById("numberA");
@@ -51,12 +62,13 @@
                 angle.oninput = function()
                 {
                     outputA.innerHTML = this.value;
+                    draw();
                 }
             </script>
         </div>
         <div class="color">
-            <input type="range" min="0" max="10" id="strokeW" class="slider">
             <p>outline width: <span id="numberStr"></span></p>
+            <input type="range" min="0" max="10" id="strokeW" class="slider"><br>
             fill color: <input type="color" id="fill"> outline color: <input type="color" id="stroke">
             <script>
                 var strokeWidth = document.getElementById("strokeW");
@@ -66,10 +78,21 @@
                 strokeWidth.oninput = function()
                 {
                     outputStr.innerHTML = this.value;
+                    draw();
                 }
             
                 var fill = document.getElementById("fill");
                 var stroke = document.getElementById("stroke");
+
+                fill.oninput = function()
+                {
+                    draw();
+                }
+
+                stroke.oninput = function()
+                {
+                    draw();
+                }
             </script>
         </div>
         <div id="empty">
@@ -80,6 +103,9 @@
     <div id="code">
         <!--Textbox with code goes here-->
         code:
+        <script>
+            
+        </script>
     </div>
 
     <div id="shape">
@@ -87,24 +113,24 @@
 
         <div id="draw">
             <script>
-                document.getElementById("sides").addEventListener("change", draw);
-                document.getElementById("size").addEventListener("change", draw);
-                document.getElementById("fill").addEventListener("change", draw);
-                document.getElementById("stroke").addEventListener("change", draw);
-                document.getElementById("strokeW").addEventListener("change", draw);
-
                 function draw()
                 {
                     var div = document.getElementById("draw");
                     
                     if(div.firstChild)
                     {
+                    
                         div.innerHTML = "";
                     }
 
+                    var width = size.value * 10;
+                    var height = size.value * 10;
+                    var rotate = angle.value;
+                    console.log(rotate);
+
                     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('width', size.value * 10);
-                    svg.setAttribute('height', size.value * 10);
+                    svg.setAttribute('width', width);
+                    svg.setAttribute('height', height);
                     svg.style.position = "absolute"; 
 
                     //determining the size of the shape
@@ -119,7 +145,7 @@
                     {
                         var x = centerX + radius * Math.cos(i * angle);
                         var y = centerY + radius * Math.sin(i * angle);
-                        points.push(x + "," + y);
+                        points.push(x + ',' + y);
                         console.log(points);
                     }
 
@@ -128,12 +154,13 @@
                     polygon.setAttribute('fill', fill.value);
                     polygon.setAttribute('stroke', stroke.value);
                     polygon.setAttribute('stroke-width', strokeWidth.value);
+                    svg.setAttribute('transform', 'rotate(' + rotate + '),' + centerX + ',' + centerY + ')');
                     svg.appendChild(polygon);
 
                     div.appendChild(svg);
 
-                    //var code = document.getElementById("code");
-                    //code.innerHTML = '<div id="code"> code: <polygon points="' + points + '" style="fill:' + fill.value + ';stroke:' + stroke.value + ';stroke-width:' + strokeWidth.value + '"/> </div>'
+                    var code = document.getElementById("code");
+                    code.innerHTML = 'code: polygon points="' + points + '" style="fill:' + fill.value + ';stroke:' + stroke.value + ';stroke-width:' + strokeWidth.value + '"'
                 }
             </script>
         </div>
