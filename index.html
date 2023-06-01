@@ -10,16 +10,18 @@
 <body>
     <div id="tutorial">
         <div id="tutorial-content">
-            Hi there, this HTML lets you create any SVG (Scalable Vector Graphics) shape (within limitations, feel free to change those by editing the code).
+            <br>Hi there, this HTML lets you create any SVG (Scalable Vector Graphics) shape (within limitations, feel free to change those by editing the code).
             <br><br>So, how does this work?
-            <br>You can use the sliders and the color pickers to change the properties of the shape, the shape will then appear with code above it (remember to add the brackets "&lt/>")
-            <br>And feel free to check out my GitHub: https://github.com/VOL-T
+            <br>You can use the sliders and the color pickers to change the properties of the shape, the shape will then appear with code above it (remember to add the brackets if you want to copy the code for your own use: "&lt/>")
+            <br><br>And feel free to check out my GitHub: https://github.com/VOL-T
+            <br><br>Have a nice day :)
         </div>
         <h2>Tutorial</h2>
     </div>
     <div id="customize">
         <!--sliders with customization-->
         <div class="sliderdiv">
+            <!--sides-->
             <p>sides: <span id="numberS"></span></p>
             <input type="range" min="3" max="20" id="sides" class="slider">
 
@@ -36,6 +38,7 @@
             </script>
         </div>
         <div class="sliderdiv">
+            <!--size-->
             <p>size: <span id="numberSi"></span></p>
             <input type="range" min="1" max="50" id="size" class="slider">
 
@@ -52,8 +55,10 @@
             </script>
         </div>
         <div class="sliderdiv">
+            <!--angle-->
             <p>angle: <span id="numberA"></span></p>
             <input type="range" min="0" max="360" id="angle" class="slider">
+
             <script>
                 var angle = document.getElementById("angle");
                 var outputA = document.getElementById("numberA");
@@ -67,9 +72,11 @@
             </script>
         </div>
         <div class="color">
+            <!--width and colors-->
             <p>outline width: <span id="numberStr"></span></p>
             <input type="range" min="0" max="10" id="strokeW" class="slider"><br>
             fill color: <input type="color" id="fill"> outline color: <input type="color" id="stroke">
+            
             <script>
                 var strokeWidth = document.getElementById("strokeW");
                 var outputStr = document.getElementById("numberStr");
@@ -101,7 +108,7 @@
     </div>
 
     <div id="code">
-        <!--Textbox with code goes here-->
+        <!--code goes here-->
         code:
         <script>
             
@@ -109,8 +116,7 @@
     </div>
 
     <div id="shape">
-        <!--Shape is generated here-->
-
+        <!--chape is generated here-->
         <div id="draw">
             <script>
                 function draw()
@@ -126,35 +132,35 @@
                     var width = size.value * 10;
                     var height = size.value * 10;
                     var rotate = angle.value;
-                    console.log(rotate);
+                    console.log(rotate)
 
                     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                     svg.setAttribute('width', width);
                     svg.setAttribute('height', height);
                     svg.style.position = "absolute"; 
-
+                    
+                    
                     //determining the size of the shape
                     var centerX = size.value * 5;
                     var centerY = size.value * 5;
                     var radius = size.value * 4;
-                    var angle = (2 * Math.PI) / sides.value;
+                    var math = (2 * Math.PI) / sides.value;
                     var points = [];
-
+                    
                     //loop generating coordinates of points
                     for (var i = 0; i < sides.value; i++)
                     {
-                        var x = centerX + radius * Math.cos(i * angle);
-                        var y = centerY + radius * Math.sin(i * angle);
+                        var x = centerX + radius * Math.cos(i * math);
+                        var y = centerY + radius * Math.sin(i * math);
                         points.push(x + ',' + y);
-                        console.log(points);
                     }
-
+                    
                     var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
                     polygon.setAttribute('points', points.join(' '));
                     polygon.setAttribute('fill', fill.value);
                     polygon.setAttribute('stroke', stroke.value);
                     polygon.setAttribute('stroke-width', strokeWidth.value);
-                    svg.setAttribute('transform', 'rotate(' + rotate + '),' + centerX + ',' + centerY + ')');
+                    polygon.setAttribute('transform', 'rotate(' + rotate + ',' + centerX + ',' + centerY + ')');
                     svg.appendChild(polygon);
 
                     div.appendChild(svg);
