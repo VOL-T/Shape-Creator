@@ -4,6 +4,8 @@ body
     margin: 0;
     padding: 0;
     background: rgb(236, 236, 236);
+    font-family: Nova Flat;
+    font-size: 125%;
 }
 
 body::-webkit-scrollbar
@@ -53,7 +55,6 @@ div
 {
     color: black;
 }
-
 
 #shape
 {
@@ -122,5 +123,6 @@ div
 {
     line-height: 1;
     width: 80%;
+    height: 100%;
     overflow-wrap: break-word;
 }
