@@ -150,8 +150,8 @@
                     //loop generating coordinates of points
                     for (var i = 0; i < sides.value; i++)
                     {
-                        var x = centerX + radius * Math.cos(i * math);
-                        var y = centerY + radius * Math.sin(i * math);
+                        var x = centerX + radius * Math.cos(i * math + rotate * Math.PI / 180);
+                        var y = centerY + radius * Math.sin(i * math + rotate * Math.PI / 180);
                         points.push(x + ',' + y);
                     }
                     
