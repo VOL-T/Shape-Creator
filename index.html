@@ -126,7 +126,6 @@
                     
                     if(div.firstChild)
                     {
-                    
                         div.innerHTML = "";
                     }
 
@@ -167,8 +166,8 @@
                     div.appendChild(svg);
 
                     var code = document.getElementById("code");
-                    code.innerHTML = 'code: <br><br> polygon points="' + points + '" style="fill:' + fill.value + ';stroke:' + stroke.value + ';stroke-width:' + strokeWidth.value + '"'
-                }
+                    code.innerHTML = `code: <br><br> polygon points="${points}"" style="fill:${fill.value}; stroke:${stroke.value}; stroke-width:${strokeWidth.value}"` 
+                    }
             </script>
         </div>
     </div>
