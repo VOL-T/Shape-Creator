@@ -9,167 +9,195 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nova Flat">
 </head>
 <body>
-    <div id="tutorial">
-        <div id="tutorial-content">
-            <br>Hi there, this HTML lets you create any SVG (Scalable Vector Graphics) shape (within limitations, feel free to change those by editing the code).
-            <br><br>So, how does this work?
-            <br>You can use the sliders and the color pickers to change the properties of the shape, the shape will then appear with code above it (remember to add the brackets if you want to copy the code for your own use: "&lt/>")
-            <br><br>And feel free to check out my GitHub: https://github.com/VOL-T
-            <br><br>Have a nice day :)
-        </div>
-        <h2>Tutorial</h2>
+    <div class="top">
+        <span>
+            <a href="https://github.com/VOL-T" target="_blank"><h2 id="logo">VOL-T</h2></a>
+        </span>
+        <span class="tooltip">
+            <button id="copy">
+                <span class="tooltipText" id="toolText">Press to copy</span>
+                COPY CODE
+            </button>
+        </span>
+        <button id="tutorial">TUTORIAL</button>
     </div>
-    <div id="customize">
-        <!--sliders with customization-->
-        <div class="sliderdiv">
-            <!--sides-->
-            <p>sides: <span id="numberS"></span></p>
-            <input type="range" min="3" max="20" id="sides" class="slider">
-
-            <script>
-                var sides = document.getElementById("sides");
-                var outputS = document.getElementById("numberS");
-                outputS.innerHTML = sides.value;
-
-                sides.oninput = function()
-                {
-                    outputS.innerHTML = this.value;
-                    draw();
-                }
-            </script>
-        </div>
-        <div class="sliderdiv">
-            <!--size-->
-            <p>size: <span id="numberSi"></span></p>
-            <input type="range" min="1" max="50" id="size" class="slider">
-
-            <script>
-                var size = document.getElementById("size");
-                var outputSi = document.getElementById("numberSi");
-                outputSi.innerHTML = size.value;
-
-                size.oninput = function()
-                {
-                    outputSi.innerHTML = this.value;
-                    draw();
-                }
-            </script>
-        </div>
-        <div class="sliderdiv">
-            <!--angle-->
-            <p>angle: <span id="numberA"></span></p>
-            <input type="range" min="0" max="360" id="angle" class="slider">
-
-            <script>
-                var angle = document.getElementById("angle");
-                var outputA = document.getElementById("numberA");
-                outputA.innerHTML = angle.value;
-
-                angle.oninput = function()
-                {
-                    outputA.innerHTML = this.value;
-                    draw();
-                }
-            </script>
-        </div>
-        <div class="color">
-            <!--width and colors-->
-            <p>outline width: <span id="numberStr"></span></p>
-            <input type="range" min="0" max="10" id="strokeW" class="slider"><br>
-            fill color: <input type="color" id="fill"> outline color: <input type="color" id="stroke">
-            
-            <script>
-                var strokeWidth = document.getElementById("strokeW");
-                var outputStr = document.getElementById("numberStr");
-                outputStr.innerHTML = strokeWidth.value;
-
-                strokeWidth.oninput = function()
-                {
-                    outputStr.innerHTML = this.value;
-                    draw();
-                }
-            
-                var fill = document.getElementById("fill");
-                var stroke = document.getElementById("stroke");
-
-                fill.oninput = function()
-                {
-                    draw();
-                }
-
-                stroke.oninput = function()
-                {
-                    draw();
-                }
-            </script>
-        </div>
-        <div id="empty">
-            
+    <div id="tutorialOverlay" class="hidden">
+        <div id="tutorialContent">
+            <button id="closeTutorial">&times;</button>
+            <h1>Hi there!</h1>
+            <p>This website lets you create any SVG (Scalable Vector Graphics) shape (within limitations, feel free to change those by editing the code).</p>
+            <h3>So, how does this work?</h3>
+            <p>You can use the sliders and the color pickers to change the properties of the shape. The shape will then appear.</p>
+            <h3>How do I put something like that on my own website?</h3>
+            <p>By clicking the "COPY CODE" button you will copy the polygon's code into your clipboard. You then paste it within the &lt;svg&gt; tag. You can find more details on <a id="aTutorial" href="https://www.w3schools.com/graphics/svg_intro.asp" target="_blank">https://www.w3schools.com/graphics/svg_intro.asp</a>.</p>
+            <p>Check out my <a id="aTutorial" href="https://github.com/VOL-T" target="_blank">GitHub</a> for more cool websites~!</p>
         </div>
     </div>
-
-    <div id="code">
-        <!--code goes here-->
-        code:
-        <script>
-            
-        </script>
-    </div>
-
-    <div id="shape">
-        <!--shape is generated here-->
-        <div id="draw">
-            <script>
-                function draw()
-                {
-                    var div = document.getElementById("draw");
-                    
-                    if(div.firstChild)
+    <div class="container">
+        <span id="customize">
+            <!--sliders with customization-->
+            <div class="sliderdiv">
+                <!--sides-->
+                <p>Sides: <span id="numberS"></span></p>
+                <input type="range" min="3" max="50" id="sides" class="slider">
+    
+                <script>
+                    var sides = document.getElementById("sides");
+                    var outputS = document.getElementById("numberS");
+                    outputS.innerHTML = sides.value;
+    
+                    sides.oninput = function()
                     {
-                        div.innerHTML = "";
+                        outputS.innerHTML = this.value;
+                        draw();
                     }
-
-                    var width = size.value * 10;
-                    var height = size.value * 10;
-                    var rotate = angle.value;
-                    console.log(rotate)
-
-                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('width', width);
-                    svg.setAttribute('height', height);
-                    svg.style.position = "absolute"; 
-                    
-                    
-                    //determining the size of the shape
-                    var centerX = size.value * 5;
-                    var centerY = size.value * 5;
-                    var radius = size.value * 4;
-                    var math = (2 * Math.PI) / sides.value;
-                    var points = [];
-                    
-                    //loop generating coordinates of points
-                    for (var i = 0; i < sides.value; i++)
+                </script>
+            </div>
+            <div class="sliderdiv">
+                <!--size-->
+                <p>Size: <span id="numberSi"></span></p>
+                <input type="range" min="1" max="75" id="size" class="slider">
+    
+                <script>
+                    var size = document.getElementById("size");
+                    var outputSi = document.getElementById("numberSi");
+                    outputSi.innerHTML = size.value;
+    
+                    size.oninput = function()
                     {
-                        var x = centerX + radius * Math.cos(i * math + rotate * Math.PI / 180);
-                        var y = centerY + radius * Math.sin(i * math + rotate * Math.PI / 180);
-                        points.push(x + ',' + y);
+                        outputSi.innerHTML = this.value;
+                        draw();
                     }
-                    
-                    var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                    polygon.setAttribute('points', points.join(' '));
-                    polygon.setAttribute('fill', fill.value);
-                    polygon.setAttribute('stroke', stroke.value);
-                    polygon.setAttribute('stroke-width', strokeWidth.value);
-                    polygon.setAttribute('transform', 'rotate(' + rotate + ',' + centerX + ',' + centerY + ')');
-                    svg.appendChild(polygon);
-
-                    div.appendChild(svg);
-
-                    var code = document.getElementById("code");
-                    code.innerHTML = `code: <br><br> polygon points="${points}"" style="fill:${fill.value}; stroke:${stroke.value}; stroke-width:${strokeWidth.value}"` 
+                </script>
+            </div>
+            <div class="sliderdiv">
+                <!--angle-->
+                <p>Angle: <span id="numberA"></span></p>
+                <input type="range" min="0" max="360" id="angle" class="slider">
+    
+                <script>
+                    var angle = document.getElementById("angle");
+                    var outputA = document.getElementById("numberA");
+                    outputA.innerHTML = angle.value;
+    
+                    angle.oninput = function()
+                    {
+                        outputA.innerHTML = this.value;
+                        draw();
                     }
-            </script>
-        </div>
+                </script>
+            </div>
+            <div class="color">
+                <!--width and colors-->
+                <p>Outline width: <span id="numberStr"></span></p>
+                <input type="range" min="0" max="25" id="strokeW" class="slider">
+                <p>Fill color: <input type="color" id="fill"> <br><br> Outline color: <input type="color" id="stroke"></p>
+                
+                <script>
+                    var strokeWidth = document.getElementById("strokeW");
+                    var outputStr = document.getElementById("numberStr");
+                    outputStr.innerHTML = strokeWidth.value;
+    
+                    strokeWidth.oninput = function()
+                    {
+                        outputStr.innerHTML = this.value;
+                        draw();
+                    }
+                
+                    var fill = document.getElementById("fill");
+                    var stroke = document.getElementById("stroke");
+    
+                    fill.oninput = function()
+                    {
+                        draw();
+                    }
+    
+                    stroke.oninput = function()
+                    {
+                        draw();
+                    }
+                </script>
+            </div>
+        </span>
+        <span id="shape">
+            <!--shape is generated here-->
+            <div id="draw">
+                <script>
+                    function draw()
+                    {
+                        var div = document.getElementById("draw");
+                        
+                        if(div.firstChild)
+                        {
+                            div.innerHTML = "";
+                        }
+
+                        var width = size.value * 10;
+                        var height = size.value * 10;
+                        var rotate = angle.value;
+
+                        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        svg.setAttribute('width', width);
+                        svg.setAttribute('height', height);
+                        svg.style.position = "absolute"; 
+                        
+                        
+                        //determining the size of the shape
+                        var centerX = size.value * 5;
+                        var centerY = size.value * 5;
+                        var radius = size.value * 4;
+                        var math = (2 * Math.PI) / sides.value;
+                        var points = [];
+                        
+                        //loop generating coordinates of points
+                        for (var i = 0; i < sides.value; i++)
+                        {
+                            var x = centerX + radius * Math.cos(i * math + rotate * Math.PI / 180);
+                            var y = centerY + radius * Math.sin(i * math + rotate * Math.PI / 180);
+                            points.push(x + ',' + y);
+                        }
+                        
+                        var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                        polygon.setAttribute('points', points.join(' '));
+                        polygon.setAttribute('fill', fill.value);
+                        polygon.setAttribute('stroke', stroke.value);
+                        polygon.setAttribute('stroke-width', strokeWidth.value);
+                        polygon.setAttribute('transform', 'rotate(' + rotate + ',' + centerX + ',' + centerY + ')');
+                        svg.appendChild(polygon);
+
+                        div.appendChild(svg);
+
+                        var svgCode = `<polygon points="${points.join(' ')}" style="fill:${fill.value}; stroke:${stroke.value}; stroke-width:${strokeWidth.value}"/>`;
+                        document.getElementById("copy").setAttribute("data-code", svgCode);    
+                    }
+
+                    document.getElementById("copy").addEventListener("click", function() {
+                        var codeToCopy = this.getAttribute("data-code");
+                        navigator.clipboard.writeText(codeToCopy).then(function() {
+                            var tooltip = document.getElementById("toolText");
+                            tooltip.innerHTML = "Code copied!"
+                        });
+                    });
+
+                    document.getElementById("copy").addEventListener("mouseout", function() {
+                        var tooltip = document.getElementById("toolText");
+                        tooltip.innerHTML = "Press to copy";
+                    });
+
+                    document.getElementById("tutorial").addEventListener("click", function() {
+                        document.getElementById("tutorialOverlay").classList.remove("hidden");
+                        document.body.style.overflow = "hidden";
+                        console.log("hiddenn't");
+                    });
+
+                    document.getElementById("closeTutorial").addEventListener("click", function() {
+                        document.getElementById("tutorialOverlay").classList.add("hidden");
+                        document.body.style.overflow = "";
+                        console.log("hidden");
+                    });
+                </script>
+            </div>
+        </span>
     </div>
 </body>
 </html>

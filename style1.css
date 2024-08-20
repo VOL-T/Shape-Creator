@@ -1,115 +1,153 @@
-body
-{
+@import url('https://fonts.googleapis.com/css2?family=Matemasie&family=Permanent+Marker&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background: rgb(236, 236, 236);
-    font-family: Nova Flat;
-    font-size: 125%;
+    background: #F2F2F2;
+    color: #474A59;
+    font-family: Ubuntu;
+    font-size: 3vh;
 }
 
-body::-webkit-scrollbar
-{
+body::-webkit-scrollbar {
     display: none;
 }
 
-div
-{
-    padding: 0px;
-    width:100%;
-    margin:0 auto;
+a {
+    text-decoration: none;
 }
 
-#tutorial
-{
+#aTutorial {
+    color: #474A59;
+    font-weight: 500;
+}
+
+#logo {
+    color: #474A59;
+    margin-left: 2rem;
+    font-size: 7vh;
+}
+
+#logo:hover {
+    color: #2B2D33;
+    transition: 0.5s;
+}
+
+.container {
+    display: flex;
+}
+
+.top {
+    background: #DCD2C6;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 5px #F4F2F4 solid;
+}
+
+.tooltip {
     position: relative;
     display: inline-block;
-    height: 10vh;
-    text-align: center;
 }
   
-#tutorial-content
-{
-    display: none;
+.tooltip .tooltipText {
+    visibility: hidden;
+    width: 11rem;
+    color: #474A59;
+    background: #E6E3DC;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
     position: absolute;
-    text-align: center;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
     z-index: 1;
+    bottom: -100%;
+    left: 43%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 2vh;
 }
   
-#tutorial:hover #tutorial-content
-{
-    display:contents;
-    height: 20vh;
-    line-height: 1;
+.tooltip .tooltipText::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #E6E3DC transparent;
+}
+  
+.tooltip:hover .tooltipText {
+    visibility: visible;
+    opacity: 1;
 }
 
-#tutorial:hover
-{
-    color: rgb(236, 236, 236)
+.top button {
+    margin-right: 2rem;
+    font-size: 3vh;
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: #474A59;
 }
 
-#tutorial-content
-{
-    color: black;
+.top button:hover {
+    cursor: pointer;
+    color: #2B2D33;
+    transition: 0.5s;
 }
 
-#shape
-{
+#customize {
+    background: #E6E3DC;
+    width: 60%;
+    height: 85vh;
+    border: 5px #F4F2F4 solid;
+    border-top: none;
+    padding-top: 5vh;
+}
+
+#shape {
     width: 100%;
-    height: 60vh;
+    height: 100vh;
+    border: 5px #F4F2F4 solid;
+    border-top: none;
+    border-left: none;
 }
 
-#customize
-{
-    width: 100%;
-    height: 50%;
-    line-height: 0;
-}
-
-.slider
-{
+.slider {
     width: 75%;
-    height: 25px;
     outline: none;
     opacity: 0.5;
     -webkit-transition: .9s;
-    transition: opacity .9s;
-    
+    transition: .9s;
+    accent-color: #DCD2C6;
 }
 
-.slider:hover
-{
+.slider:hover {
     opacity: 1;
     cursor:grab;
 }
 
-.slider::-webkit-slider-thumb
-{
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none; 
     appearance: none;
     width: 25px;
     height: 25px;
-    background: #04AA6D; 
     
 }
 
-#empty
-{
-    height: 20px;
-}
-
-#shape
-{
+#shape {
     display: inline-block; 
-    width: 100%;           
+    width: 100%; 
+    height: 90vh;          
     position: relative;
 }
 
-#draw
-{
+#draw {
     display: flex;
     width: 100%;
     height: 100%;
@@ -119,10 +157,88 @@ div
     position: relative;
 }
 
-#code
-{
-    line-height: 1;
-    width: 80%;
+#tutorialOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    overflow-wrap: break-word;
+    background-color: #474A59A9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+#tutorialOverlay.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+#tutorialContent {
+    background: #E6E3DC;
+    min-width: 60%;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+#closeTutorial {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 50px;
+    cursor: pointer;
+    color: #474A59;
+}
+
+#closeTutorial:hover {
+    color: #2B2D33;
+    transition: 0.5s;
+}
+
+@media (max-width: 1100px) {
+    body {
+        font-size: 2.5vh;
+        background: #E6E3DC;;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .top button {
+        font-size: 2vh;
+        margin-right: 1rem;
+    }
+
+    #logo {
+        font-size: 4vh;
+        margin-left: 1rem;
+    }
+
+    #customize {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        background: #F2F2F2;
+    }
+    
+    #shape {
+        width: 100%;
+        height: auto;
+        margin-top: 50vh;
+        border-bottom: none;
+    }
+
+    #tutorialContent {
+        padding: 5px;
+    }
 }
